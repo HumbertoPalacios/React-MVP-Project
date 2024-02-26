@@ -1,11 +1,11 @@
 import express from "express"; // Import express
 import pg from "pg"; // Import pg
+import cors from "cors"; // Import CORS module
 
 const PORT = 8001; // Assign 8001 to PORT const
-
 const app = express(); // Invoke express framework and store it in const app
-
 app.use(express.json()); // Utilize middleware proviced by express that parses data into json format
+app.use(cors()); // Enable CORS for all routes
 
 const pool = new pg.Pool({ // Create a collection of database connections (new pool instances) and assign it to the pool const 
     host: 'localhost',
