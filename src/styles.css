@@ -38,6 +38,17 @@
     background: hsl(200, 100%, 50%, 0.2);
   }
   
+  .btn-info {
+    background-color: rgba(32, 128, 157, 0.1); /* Light blue background with transparency */
+    border: 1px solid #20809d; /* Solid blue border */
+    color: #20809d; /* Blue text for consistency */
+  }
+
+  .btn-info:hover,
+  .btn-info:focus-visible {
+    background-color: rgba(32, 128, 157, 0.2); /* Slightly darker blue on hover/focus with transparency */
+  } 
+
   .btn.btn-danger {
     background: hsl(0, 100%, 40%, 0.1);
     border: 1px solid hsl(0, 100%, 40%);
@@ -48,6 +59,7 @@
   .btn.btn-danger:focus-visible {
     background: hsl(0, 100%, 40%, 0.2);
   }
+
   
   .new-item-form input {
     outline: none;

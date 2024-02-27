@@ -35,7 +35,7 @@ app.get("/goals/:id", (req, res) => {
         res.status(400).send("Invalid Id"); // If not, send a response stating that the id is invalid
         return; // Terminate code execution 
     }
-    pool.query(`SELECT * FROM goals WHERE goalId = $1`, [id]) // Query that selects all the info from a record with a specific id 
+    pool.query(`SELECT * FROM goals WHERE goalid = $1`, [id]) // Query that selects all the info from a record with a specific id 
         .then((data) => { // If query was successful
             if (data.rows.length === 0) { // Verify if record exists 
                 res.sendStatus(404); // If it does not, send 404 message
@@ -76,7 +76,7 @@ app.patch("/goals/:id", (req, res) => {
         res.status(400).send("Invalid Id."); // If it's not, send 400 message
         return; // And terminate code execution
     }
-    pool.query(`UPDATE goals SET goal = COALESCE($1, goal) WHERE goalId = $2 RETURNING *`, [goal, id]) // Query that updates specific record
+    pool.query(`UPDATE goals SET goal = COALESCE($1, goal) WHERE goalid = $2 RETURNING *`, [goal, id]) // Query that updates specific record
         .then((data) => { // If query was successful
             if (data.rows.length === 0) { // Verify if record exists 
                 res.status(404).send(`Goal with id: ${id} could not be found.`); // If it does not, send 404 message
@@ -98,7 +98,7 @@ app.delete("/goals/:id", (req, res) => {
         res.status(400).send("Invalid Id."); // If it's not, send 400 message
         return; // And terminate code execution 
     }
-    pool.query(`DELETE FROM goals WHERE goalId = $1 RETURNING *`, [id]) // Query that deletes record with specific id 
+    pool.query(`DELETE FROM goals WHERE goalid = $1 RETURNING *`, [id]) // Query that deletes record with specific id 
         .then((data) => { // If query was successful
             if (data.rows.length === 0) { // Verify if record exists 
                 res.status(404).send(`Goal with id: ${id} could not be found.`); // If it does not, send 404 message
