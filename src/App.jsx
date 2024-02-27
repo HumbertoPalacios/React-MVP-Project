@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react"; // Import useState in order for us to create and set state of components
 import "./styles.css"; // Import styles from our CSS file
+import { GoalForm } from "./GoalForm";
+import { GoalList } from "./GoalList";
 
 // Main App which is rendered on the screen
 export default function App() {
@@ -95,31 +97,17 @@ export default function App() {
       })
     };
 
-  return (
-    <>
-      <form className="new-item-form">
-        <div className="form-row">
-          <label htmlFor="goal">New Goal:</label>
-          <input type="text" id="goal" value={createGoal} onChange={handleGoalInput}/>
-        </div>
+    return (
+      <>
+        <GoalForm
+          createGoal={createGoal}
+          handleGoalInput={handleGoalInput}
+          handleSaveGoal={handleSaveGoal}
+          editGoal={editGoal}
+        />
         <button type="button" className="btn" onClick={fetchGoals}>Get All Goals</button>
-        <button type="button" className="btn" onClick={handleSaveGoal}>
-        {editGoal ? 'Update Goal' : 'Create Goal'}
-        </button>
-      </form>
-      <h2>My Goals:</h2>
-      <ul className="list">
-        {getGoals.map((goal) => (
-          <li key={goal.goalid}>
-            <label>
-              <input type="checkbox"/>
-              {goal.goal}
-              <button className="btn btn-info" onClick={() => handleEditClick(goal.goalid, goal.goal)}>Edit</button>
-              <button className="btn btn-danger" onClick={() => handleDeleteGoal(goal.goalid)}>Delete</button>
-            </label>
-          </li>
-        ))}
-      </ul>
-    </>
-  );
-}
+        <h2>My Goals:</h2>
+        <GoalList goals={getGoals} onEdit={handleEditClick} onDelete={handleDeleteGoal}/>
+      </>
+    );
+  }
